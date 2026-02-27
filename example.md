@@ -1,5 +1,5 @@
 ---
-md_to_pdf_plugin: ./hierarchy-table.config.yaml
+oshea_plugin: ./default.yaml
 title: "Project Phoenix: Key Phases & Deliverables"
 # pdf_options: # Optional front matter override for specific slide needs
 #   landscape: true

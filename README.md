@@ -10,10 +10,10 @@ cli_help: |
 
   Expected Front Matter:
     - title: (string, optional) Title for the PDF document metadata.
-    # pdf_options can be used here to override specific slide settings from hierarchy-table.config.yaml
+    # pdf_options can be used here to override specific slide settings from default.yaml
 
-  Configuration Notes (hierarchy-table.config.yaml):
-    - css_files: Points to "hierarchy-table.css".
+  Configuration Notes (default.yaml):
+    - css_files: Points to "style.css".
     - pdf_options: Defines landscape orientation, page size (e.g., Letter), and minimal margins.
 
   Example Usage:
@@ -35,15 +35,15 @@ This plugin was developed to showcase how `oshea` can be extended for specific p
     # oshea plugin create hierarchy-table --dir ../oshea-plugins
     ```
     This command (if run) would generate boilerplate files:
-    * `hierarchy-table/hierarchy-table.config.yaml`
+    * `hierarchy-table/default.yaml`
     * `hierarchy-table/index.js`
-    * `hierarchy-table/hierarchy-table.css`
+    * `hierarchy-table/style.css`
     * `hierarchy-table/README.md` (this file!)
 
 2.  **Defining the Purpose:**
     The goal was clear: take a Markdown table and display it well on a single, landscape PDF page, resembling a presentation slide.
 
-3.  **Crafting Example Content (`hierarchy-table-example.md`):**
+3.  **Crafting Example Content (`example.md`):**
     An example Markdown file was created, including a title (H1) and a Markdown table. This served as the primary input for testing.
     ```markdown
     ---
@@ -58,18 +58,17 @@ This plugin was developed to showcase how `oshea` can be extended for specific p
     | ... (more rows) ... | ...          | ...                                       | ...            |
     ```
 
-4.  **Configuring Plugin Behavior (`hierarchy-table.config.yaml`):**
+4.  **Configuring Plugin Behavior (`default.yaml`):**
     * `description` was updated.
     * `handler_script` was confirmed as `index.js` (to use `DefaultHandler`).
-    * `css_files` was set to `["hierarchy-table.css"]`.
+    * `css_files` was set to `["style.css"]`.
     * `pdf_options` were crucial:
         * `landscape: true`
         * `format: "Letter"` (or specific width/height for 16:9)
         * `margin`: Kept small (e.g., "0.5in") for maximum slide real estate.
         * `printBackground: true` to allow CSS background colors for the slide.
-    * `inject_fm_title_as_h1: false` because the slide title comes from the Markdown content itself.
 
-5.  **Styling the Slide and Table (`hierarchy-table.css`):**
+5.  **Styling the Slide and Table (`style.css`):**
     CSS was written to:
     * Set a basic slide background and default font sizes suitable for projection.
     * Style the H1 (if used in the Markdown for a slide title).
@@ -82,10 +81,10 @@ This plugin was developed to showcase how `oshea` can be extended for specific p
     This README file was updated to explain the plugin's purpose, expected input, configuration, and provide usage examples. The `cli_help` front matter section was filled out for `oshea plugin help hierarchy-table`.
 
 8.  **Testing and Iteration:**
-    The plugin was tested by converting `hierarchy-table-example.md`:
+    The plugin was tested by converting `example.md`:
     ```bash
     # Assuming 'hierarchy-table' is registered in a relevant oshea config.yaml
-    oshea convert path/to/hierarchy-table-example.md --plugin hierarchy-table
+    oshea convert path/to/example.md --plugin hierarchy-table
     ```
     CSS and `pdf_options` were tweaked until the desired slide appearance was achieved.
 
@@ -96,14 +95,14 @@ This plugin was developed to showcase how `oshea` can be extended for specific p
     * The main Markdown table.
     * Optionally, a brief concluding paragraph or caption.
 
-    Example: See `hierarchy-table-example.md`.
+    Example: See `example.md`.
 
 2.  **Ensure the plugin is registered** in your `oshea` configuration (XDG or project-level `config.yaml`).
     Example registration:
     ```yaml
     # In your main config.yaml
     document_type_plugins:
-      hierarchy-table: "/path/to/oshea-plugins/hierarchy-table/hierarchy-table.config.yaml"
+      hierarchy-table: "/path/to/oshea-plugins/hierarchy-table/default.yaml"
     ```
 
 3.  **Convert your file:**
@@ -113,5 +112,5 @@ This plugin was developed to showcase how `oshea` can be extended for specific p
 
 ## Customization
 
-* Modify `hierarchy-table.css` to change the visual theme (colors, fonts, table styles).
+* Modify `style.css` to change the visual theme (colors, fonts, table styles).
 * Override `pdf_options` in your Markdown file's front matter or in your XDG/project configuration for specific slide dimension or margin needs.
