@@ -5,6 +5,25 @@ protocol: v1
 description: |-
   Plugin to display a Markdown table as a presentation slide, ideal
   for hierarchies or structured data.
+cli_help: |
+  Plugin: hierarchy-table
+  Description: Displays a Markdown table as a landscape presentation slide.
+
+  Features:
+    - Optimized for clear presentation of tabular data on a single slide.
+    - Uses landscape orientation by default.
+    - Customizable CSS for table and slide appearance.
+
+  Expected Front Matter:
+    - title: (string, optional) Title for the PDF document metadata.
+    # pdf_options can be used here to override specific slide settings from default.yaml
+
+  Configuration Notes (default.yaml):
+    - css_files: Points to "style.css".
+    - pdf_options: Defines landscape orientation, page size (e.g., Letter), and minimal margins.
+
+  Example Usage:
+    oshea convert my-table-slide.md --plugin hierarchy-table
 handler_script: "index.js"
 css_files:
   - "style.css"

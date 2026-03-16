@@ -1,26 +1,14 @@
----
-cli_help: |
-  Plugin: hierarchy-table
-  Description: Displays a Markdown table as a landscape presentation slide.
-
-  Features:
-    - Optimized for clear presentation of tabular data on a single slide.
-    - Uses landscape orientation by default.
-    - Customizable CSS for table and slide appearance.
-
-  Expected Front Matter:
-    - title: (string, optional) Title for the PDF document metadata.
-    # pdf_options can be used here to override specific slide settings from default.yaml
-
-  Configuration Notes (default.yaml):
-    - css_files: Points to "style.css".
-    - pdf_options: Defines landscape orientation, page size (e.g., Letter), and minimal margins.
-
-  Example Usage:
-    oshea convert my-table-slide.md --plugin hierarchy-table
----
-
 # `hierarchy-table` Plugin
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="./screenshot.png" width="50%">
+        <br><strong>Hierarchy Table Sample</strong>
+      </td>
+    </tr>
+  </table>
+</div>
 
 This plugin transforms a Markdown file containing a table (and optionally a title) into a PDF formatted as a presentation slide. It's ideal for sharing structured information like organizational charts, feature comparisons, or project hierarchies.
 
@@ -72,45 +60,3 @@ This plugin was developed to showcase how `oshea` can be extended for specific p
     CSS was written to:
     * Set a basic slide background and default font sizes suitable for projection.
     * Style the H1 (if used in the Markdown for a slide title).
-    * Extensively style the `<table>`, `<th>`, `<td>` elements for clarity, readability, and a professional appearance (borders, padding, header background, optional row striping).
-
-6.  **Implementing the Handler (`index.js`):**
-    For this plugin, the standard `DefaultHandler` (provided by `coreUtils` to the plugin constructor) is sufficient. It processes the Markdown (including the table) into HTML, and the CSS + PDF options handle the rest. The `index.js` remained the simple boilerplate that delegates to `DefaultHandler`.
-
-7.  **Documentation (`README.md` and `cli_help`):**
-    This README file was updated to explain the plugin's purpose, expected input, configuration, and provide usage examples. The `cli_help` front matter section was filled out for `oshea plugin help hierarchy-table`.
-
-8.  **Testing and Iteration:**
-    The plugin was tested by converting `example.md`:
-    ```bash
-    # Assuming 'hierarchy-table' is registered in a relevant oshea config.yaml
-    oshea convert path/to/example.md --plugin hierarchy-table
-    ```
-    CSS and `pdf_options` were tweaked until the desired slide appearance was achieved.
-
-## Usage
-
-1.  **Create your Markdown file.** It should typically include:
-    * An optional H1 heading for the slide title.
-    * The main Markdown table.
-    * Optionally, a brief concluding paragraph or caption.
-
-    Example: See `example.md`.
-
-2.  **Ensure the plugin is registered** in your `oshea` configuration (XDG or project-level `config.yaml`).
-    Example registration:
-    ```yaml
-    # In your main config.yaml
-    document_type_plugins:
-      hierarchy-table: "/path/to/oshea-plugins/hierarchy-table/default.yaml"
-    ```
-
-3.  **Convert your file:**
-    ```bash
-    oshea convert your_slide_content.md --plugin hierarchy-table --outdir ./slides
-    ```
-
-## Customization
-
-* Modify `style.css` to change the visual theme (colors, fonts, table styles).
-* Override `pdf_options` in your Markdown file's front matter or in your XDG/project configuration for specific slide dimension or margin needs.
